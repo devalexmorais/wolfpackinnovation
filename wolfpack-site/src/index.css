@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background-color: #0A0A0A;
+  color: #FFFFFF;
+  overflow-x: hidden;
+}
+
+@layer components {
+  .fade-element {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .fade-element.animate-fade-in-up {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .btn-primary {
+    @apply bg-primary text-background font-semibold px-6 py-3 rounded-full 
+           transition-all duration-300 hover:bg-primary-dark hover:scale-105 
+           hover:shadow-[0_0_30px_rgba(255,165,0,0.4)];
+  }
+
+  .btn-outline {
+    @apply border-2 border-white/30 text-white font-semibold px-6 py-3 rounded-full 
+           transition-all duration-300 hover:border-primary hover:text-primary;
+  }
+
+  .card {
+    @apply bg-surface-light rounded-2xl p-8 border border-white/5 
+           transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_40px_rgba(255,165,0,0.1)];
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold mb-4;
+  }
+
+  .section-subtitle {
+    @apply text-gray-400 text-lg md:text-xl max-w-2xl;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #141414;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FFA500;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #E69500;
+}
