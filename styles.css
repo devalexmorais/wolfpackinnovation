@@ -547,7 +547,6 @@ ul {
 .app-image {
   height: 12rem;
   border-radius: 0.75rem;
-  background: linear-gradient(to bottom right, var(--surface), var(--surface-light));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -555,6 +554,18 @@ ul {
   overflow: hidden;
   position: relative;
   border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+[data-app="pedifacil"] .app-image {
+  background: linear-gradient(to bottom right, #ffa607, #ff8c00);
+}
+
+[data-app="hydramed"] .app-image {
+  background: linear-gradient(to bottom right, #149dec, #0a7bc4);
+}
+
+[data-app="finvest"] .app-image {
+  background: linear-gradient(to bottom right, #2563EB, #1a4fc4);
 }
 
 .app-image img {
@@ -574,16 +585,17 @@ ul {
   position: absolute;
   top: 0.75rem;
   right: 0.75rem;
-  background-color: rgba(255, 165, 0, 0.2);
-  color: var(--primary);
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
   font-size: 0.75rem;
   font-weight: 600;
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
+  backdrop-filter: blur(4px);
 }
 
 .app-badge.coming-soon {
-  background-color: rgba(255, 165, 0, 0.2);
+  background-color: rgba(255, 165, 0, 0.25);
 }
 
 .app-name {
