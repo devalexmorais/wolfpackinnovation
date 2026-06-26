@@ -66,9 +66,10 @@ function initScrollAnimation() {
     });
   }, observerOptions);
   
+  const delay = window.innerWidth < 768 ? 50 : 100;
   const fadeElements = document.querySelectorAll('.fade-element');
   fadeElements.forEach((el, index) => {
-    el.style.transitionDelay = `${index * 100}ms`;
+    el.style.transitionDelay = `${index * delay}ms`;
     observer.observe(el);
   });
   
@@ -77,7 +78,7 @@ function initScrollAnimation() {
     card.style.opacity = '0';
     card.style.transform = 'translateY(20px)';
     card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-    card.style.transitionDelay = `${index * 100}ms`;
+    card.style.transitionDelay = `${index * delay}ms`;
     
     const featureObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
