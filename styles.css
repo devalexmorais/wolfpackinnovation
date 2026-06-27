@@ -457,9 +457,10 @@ ul {
   background: rgba(255, 165, 0, 0.2);
   border-radius: 1.5rem;
   filter: blur(40px);
+  z-index: -1;
 }
 
-.phone-mockup > div:first-of-type:not(.phone-header) {
+.phone-mockup-inner {
   position: relative;
   background-color: var(--surface-light);
   border-radius: 1.5rem;
