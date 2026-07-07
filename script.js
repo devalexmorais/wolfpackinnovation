@@ -101,6 +101,70 @@ function initScrollAnimation() {
   });
 }
 
+window.showPrivacy = function() {
+  const header = document.getElementById('header');
+  const main = document.querySelector('main');
+  const footer = document.querySelector('.footer');
+  const privacy = document.getElementById('privacy');
+  if (header) header.style.display = 'none';
+  if (main) main.style.display = 'none';
+  if (footer) footer.style.display = 'none';
+  if (privacy) {
+    privacy.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(initPrivacyNav, 100);
+  }
+};
+
+window.hidePrivacy = function() {
+  const header = document.getElementById('header');
+  const main = document.querySelector('main');
+  const footer = document.querySelector('.footer');
+  const privacy = document.getElementById('privacy');
+  if (header) header.style.display = '';
+  if (main) main.style.display = 'block';
+  if (footer) footer.style.display = 'block';
+  if (privacy) privacy.style.display = 'none';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+function initNavSpy() {
+  const links = document.querySelectorAll('.privacy-nav-sticky a');
+  const blocks = document.querySelectorAll('.privacy-block');
+  if (!links.length || !blocks.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        links.forEach(link => {
+          link.style.color = '';
+          link.style.borderLeftColor = 'transparent';
+          if (window.innerWidth < 1024) {
+            link.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+          }
+          if (link.getAttribute('href') === '#' + id) {
+            link.style.color = 'var(--primary)';
+            if (window.innerWidth >= 1024) {
+              link.style.borderLeftColor = 'var(--primary)';
+            } else {
+              link.style.borderColor = 'var(--primary)';
+            }
+          }
+        });
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '-80px 0px 0px 0px' });
+
+  blocks.forEach(block => observer.observe(block));
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (document.querySelector('.privacy-nav')) {
+    setTimeout(initNavSpy, 200);
+  }
+});
+
 window.handleSubmit = async function(e) {
   e.preventDefault();
 
