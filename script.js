@@ -133,28 +133,52 @@ function initNavSpy() {
   const blocks = document.querySelectorAll('.privacy-block');
   if (!links.length || !blocks.length) return;
 
+  const intersecting = new Set();
+
+  function setActiveLink(id) {
+    links.forEach(link => {
+      link.style.color = '';
+      link.style.borderLeftColor = 'transparent';
+      if (window.innerWidth < 1024) {
+        link.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+      }
+      if (link.getAttribute('href') === '#' + id) {
+        link.style.color = 'var(--primary)';
+        if (window.innerWidth >= 1024) {
+          link.style.borderLeftColor = 'var(--primary)';
+        } else {
+          link.style.borderColor = 'var(--primary)';
+        }
+      }
+    });
+  }
+
+  function updateActiveLink() {
+    let topBlock = null;
+    intersecting.forEach(block => {
+      if (!topBlock || block.getBoundingClientRect().top < topBlock.getBoundingClientRect().top) {
+        topBlock = block;
+      }
+    });
+    if (topBlock) {
+      setActiveLink(topBlock.id);
+    }
+  }
+
+  if (blocks.length > 0) {
+    setActiveLink(blocks[0].id);
+  }
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        links.forEach(link => {
-          link.style.color = '';
-          link.style.borderLeftColor = 'transparent';
-          if (window.innerWidth < 1024) {
-            link.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-          }
-          if (link.getAttribute('href') === '#' + id) {
-            link.style.color = 'var(--primary)';
-            if (window.innerWidth >= 1024) {
-              link.style.borderLeftColor = 'var(--primary)';
-            } else {
-              link.style.borderColor = 'var(--primary)';
-            }
-          }
-        });
+        intersecting.add(entry.target);
+      } else {
+        intersecting.delete(entry.target);
       }
     });
-  }, { threshold: 0.3, rootMargin: '-80px 0px 0px 0px' });
+    updateActiveLink();
+  }, { threshold: 0, rootMargin: '-80px 0px 0px 0px' });
 
   blocks.forEach(block => observer.observe(block));
 }
