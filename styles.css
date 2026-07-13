@@ -617,6 +617,8 @@ ul {
   padding: 2rem;
   border: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (max-width: 480px) {
@@ -648,6 +650,14 @@ ul {
 
 [data-app="pedifacil"] .app-image {
   background: linear-gradient(to bottom right, #ffa607, #ff8c00);
+}
+
+[data-app="pedifacil-parceiros"] .app-image {
+  background: linear-gradient(to bottom right, #ffa607, #ff8c00);
+}
+
+[data-app="pedifacil-parceiros"] .app-image img {
+  padding: 1.95rem;
 }
 
 [data-app="hydramed"] .app-image {
@@ -711,6 +721,7 @@ ul {
   color: var(--text-gray);
   margin-bottom: 1.5rem;
   line-height: 1.7;
+  flex: 1;
 }
 
 .app-links {
